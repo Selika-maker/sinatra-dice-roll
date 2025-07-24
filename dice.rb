@@ -1,3 +1,4 @@
+require "bundler/setup"
 require "sinatra"
 require "sinatra/reloader"
 require "better_errors"
@@ -59,6 +60,6 @@ get("/dice/5/4") do
   sum = first_dice + second_dice + third_dice + fourth_dice + fifth_dice
 
   outcome = "You rolled with a #{first_dice}, a #{second_dice}, a #{third_dice}, a #{fourth_dice}, and a #{fifth_dice} to get #{sum}."
-  "<h1>1d20</h1>
+  "<h1>5d4</h1>
    <p>#{outcome}</p>"
 end
