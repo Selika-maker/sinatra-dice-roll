@@ -9,7 +9,7 @@ BetterErrors.application_root = __dir__
 BetterErrors::Middleware.allow_ip!('0.0.0.0/0.0.0.0')
 
 get("/") do
-  "Hello World"
+  erb(:elephant)
 end
 
 get("/zebra") do
@@ -21,45 +21,61 @@ get("/giraffe") do
 end
 
 get("/dice/2/6") do
-  first_die = rand(1..6)
-  second_die = rand(1..6)
-  sum = first_die + second_die
-	
-  outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}."
-	
-  "<h1>2d6</h1>
-   <p>#{outcome}</p>"
+  @rolls = []
+
+  2.times do
+    die = rand(1..6)
+
+    @rolls.push(die)
+  end
+  
+  erb(:two_six)
 end
 
 get("/dice/2/10") do
-  first_die = rand(1..10)
-  second_die = rand(1..10)
-  sum = first_die + second_die
-	
-  outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}."
-	
-  "<h1>2d10</h1>
-   <p>#{outcome}</p>"
+  @rolls = []
+
+  2.times do
+    die = rand(1..10)
+
+    @rolls.push(die)
+  end
+
+  erb(:two_ten)
 end
 
 get("/dice/1/20") do
-  dice = rand(1..20)
+  @rolls = []
 
-  outcome = "You rolled your dice and got a number of #{dice}."
-  "<h1>1d20</h1>
-   <p>#{outcome}</p>"
+  1.times do
+    die = rand(1..20)
+
+    @rolls.push(die)
+  end
+
+  erb(:one_twenty)
 end
 
 get("/dice/5/4") do
-  first_dice = rand(1..4)
-  second_dice = rand(1..4)
-  third_dice = rand(1..4)
-  fourth_dice = rand(1..4)
-  fifth_dice = rand(1..4)
+  @rolls =[]
 
-  sum = first_dice + second_dice + third_dice + fourth_dice + fifth_dice
+  5.times do
+    die = rand(1..4)
 
-  outcome = "You rolled with a #{first_dice}, a #{second_dice}, a #{third_dice}, a #{fourth_dice}, and a #{fifth_dice} to get #{sum}."
-  "<h1>5d4</h1>
-   <p>#{outcome}</p>"
+    @rolls.push(die)
+  end
+  
+  erb(:five_four)
+end
+
+get("/dice/100/6") do
+  @rolls = []    # Create a blank array
+
+  100.times do    # 100 times...
+    die = rand(1..6)    # Generate a random number
+
+    @rolls.push(die)    # Add the random number to the array 
+  end
+
+  erb(:one_hundred_six)
 end
